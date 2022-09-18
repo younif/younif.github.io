@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"younif.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="三大特性封装性数据和操作封装，只暴露接口，从而获得数据抽象。  public定义可在外部访问 protected 可在类的内部和其派生类中访问 private只能在类内访问 继承定义了最小保护区间，与在父类的情况取最严格的属性。严格顺序：public &gt; protected &gt; private 。所以public继承访问控制不变。protected 继承可在类的内部和其派生类中访问。p">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Youni Blog">
+<meta property="og:url" content="https://younif.github.io/C++/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1.html">
+<meta property="og:site_name" content="Youni Blog">
+<meta property="og:description" content="三大特性封装性数据和操作封装，只暴露接口，从而获得数据抽象。  public定义可在外部访问 protected 可在类的内部和其派生类中访问 private只能在类内访问 继承定义了最小保护区间，与在父类的情况取最严格的属性。严格顺序：public &gt; protected &gt; private 。所以public继承访问控制不变。protected 继承可在类的内部和其派生类中访问。p">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-09-18T13:33:51.567Z">
+<meta property="article:modified_time" content="2022-09-18T13:33:51.567Z">
+<meta property="article:author" content="Youni">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://younif.github.io/C++/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title> | Youni Blog
+</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Youni Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+  
+  
+
+          <div class="content page posts-expand">
+            
+
+    
+    
+    
+    <div class="post-block" lang="zh-CN">
+      <header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">
+</h1>
+
+<div class="post-meta">
+  
+
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+          <h1 id="三大特性"><a href="#三大特性" class="headerlink" title="三大特性"></a>三大特性</h1><h2 id="封装性"><a href="#封装性" class="headerlink" title="封装性"></a>封装性</h2><p>数据和操作封装，只暴露接口，从而获得数据抽象。</p>
+<ul>
+<li>public定义可在外部访问</li>
+<li>protected 可在类的内部和其派生类中访问</li>
+<li>private只能在类内访问</li>
+<li>继承定义了最小保护区间，与在父类的情况取最严格的属性。严格顺序：<code>public &gt; protected &gt; private</code> 。所以public继承访问控制不变。protected 继承可在类的内部和其派生类中访问。private继承仅可在本类中使用。</li>
+</ul>
+<h2 id="继承性"><a href="#继承性" class="headerlink" title="继承性"></a>继承性</h2><p>通过继承的方式复用代码。由封装可分为：实现继承、接口继承。</p>
+<h2 id="多态性"><a href="#多态性" class="headerlink" title="多态性"></a>多态性</h2><p>通过复写接口代码，使得相同接口可以表现不同。</p>
+<ul>
+<li><p>重载多态：函数重载</p>
+<ul>
+<li>name mangling规则：对函数参数与函数名进行编码，生成新的函数名。<ul>
+<li>不编码返回值，因为。</li>
+<li>顶层const修饰无法区分因为，顶层指针是拷贝。</li>
+<li>不同的作用下，同名函数会覆盖。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h2 id="虚函数多态"><a href="#虚函数多态" class="headerlink" title="虚函数多态"></a>虚函数多态</h2></li>
+<li><p>模板参数多态</p>
+</li>
+<li><p>类型多态：强制类型转换</p>
+</li>
+</ul>
+<h1 id="构造与析构"><a href="#构造与析构" class="headerlink" title="构造与析构"></a>构造与析构</h1><h2 id="构造、析构的调用顺序"><a href="#构造、析构的调用顺序" class="headerlink" title="构造、析构的调用顺序"></a>构造、析构的调用顺序</h2><p>由继承深度与派生表顺序依次调用基类构造函数，然后按照类中被声明的顺序依次调用类成员构造函数。<br>析构函数则与之相反。</p>
+<h1 id="拷贝构造、赋值"><a href="#拷贝构造、赋值" class="headerlink" title="拷贝构造、赋值"></a>拷贝构造、赋值</h1><p>拷贝构造函数是根据原有对象生成一个“新”对象。赋值运算符将一个对象的值复制到“旧”对象的空间中，复制过程中需要判断目标与源对象是否为同一个对象。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Student s;</span><br><span class="line">Student s1 = <span class="number">2</span>;    <span class="comment">// 调用拷贝构造函数</span></span><br><span class="line">Student s2;</span><br><span class="line">s2 = s;    <span class="comment">// 赋值运算符操作</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="深拷贝和浅拷贝"><a href="#深拷贝和浅拷贝" class="headerlink" title="深拷贝和浅拷贝"></a>深拷贝和浅拷贝</h2><p>值语义与引用语义。值语义在复制后与源对象的内容无关，而引用语义共享同一内部对象。深拷贝指在引用语义下，做值语义复制。浅拷贝则指在引用语义下，只拷贝引用，而共享同一份引用指向的元素。</p>
+<h2 id="虚函数与构造、析构"><a href="#虚函数与构造、析构" class="headerlink" title="虚函数与构造、析构"></a>虚函数与构造、析构</h2><p>构造函数不能为虚函数。这是个鸡与蛋的问题，因为构造函数需要设置虚函数表指针，而虚函数通过虚函数表指针获得其确定函数。</p>
+<p>如果构造函数中调用虚函数则在编译期绑定为本类函数。因为构造函数必须明确自身所正在构造的对象是什么。</p>
+<p>析构函数可以为虚函数，并且在运用运行时多态时需要虚析构函数来调用正确的析构函数。</p>
+<h2 id="面试经典问题"><a href="#面试经典问题" class="headerlink" title="面试经典问题"></a>面试经典问题</h2><ul>
+<li><p>如果在构造函数中调用memset(this, 0, sizeof(*this))来初始化内存空间，有什么问题吗？</p>
+<p>对于有虚函数和虚表存在的类，这会将编译器插入的虚函数表指针等内容清空。</p>
+</li>
+</ul>
+<h1 id="覆盖、重载和隐藏"><a href="#覆盖、重载和隐藏" class="headerlink" title="覆盖、重载和隐藏"></a>覆盖、重载和隐藏</h1><ul>
+<li><p>重载：同一作用域、相同函数名、参数列表不同的函数（不关心返回值），方法：函数名重命名。</p>
+</li>
+<li><p>隐藏（重定义）：作用域嵌套、相同函数名，内部作用域函数将外部所有重载函数全覆盖。</p>
+</li>
+<li><p>覆盖（覆写、重写）：派生类中重新定义与父类只有函数体有区别的函数。此时重写虚函数则根据虚函数表指针来调用对应的表中函数，而非虚函数则编译期按类型调用对应函数。</p>
+</li>
+</ul>
+<h1 id="虚函数和纯虚函数"><a href="#虚函数和纯虚函数" class="headerlink" title="虚函数和纯虚函数"></a>虚函数和纯虚函数</h1><p>虚函数将所需要调用的函数与实例化的类所绑定，不与其指针类型所绑定，所以需要在运行时读取器内存，并查找虚函数表来确定需要调用的函数。<br>纯虚函数是未实现的虚函数，当然也可以定义，但是不能实例化，纯虚函数相作为接口名声明。</p>
+<h2 id="虚函数与内联"><a href="#虚函数与内联" class="headerlink" title="虚函数与内联"></a>虚函数与内联</h2><p>所调用的虚函数在编译期可确定时可内联，即使用类名指定其函数，此时虚函数不具有多态性。</p>
+<h2 id="虚函数与虚继承"><a href="#虚函数与虚继承" class="headerlink" title="虚函数与虚继承"></a>虚函数与虚继承</h2><ul>
+<li>相同之处：都利用了虚指针（均占用类的存储空间）和虚表（均不占用类的存储空间）</li>
+<li>不同之处：<ul>
+<li>虚继承<ul>
+<li>虚基类依旧存在继承类中，只占用存储空间</li>
+<li>虚基类表存储的是虚基类相对直接继承类的偏移</li>
+</ul>
+</li>
+<li>虚函数<ul>
+<li>虚函数不占用存储空间</li>
+<li>虚函数表存储的是虚函数地址</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      </div>
+      
+      
+      
+    </div>
+    
+
+    
+    
+    
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E5%A4%A7%E7%89%B9%E6%80%A7"><span class="nav-number">1.</span> <span class="nav-text">三大特性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%81%E8%A3%85%E6%80%A7"><span class="nav-number">1.1.</span> <span class="nav-text">封装性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%A7%E6%89%BF%E6%80%A7"><span class="nav-number">1.2.</span> <span class="nav-text">继承性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E6%80%81%E6%80%A7"><span class="nav-number">1.3.</span> <span class="nav-text">多态性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%9A%E6%80%81"><span class="nav-number">1.4.</span> <span class="nav-text">虚函数多态</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E4%B8%8E%E6%9E%90%E6%9E%84"><span class="nav-number">2.</span> <span class="nav-text">构造与析构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E3%80%81%E6%9E%90%E6%9E%84%E7%9A%84%E8%B0%83%E7%94%A8%E9%A1%BA%E5%BA%8F"><span class="nav-number">2.1.</span> <span class="nav-text">构造、析构的调用顺序</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E3%80%81%E8%B5%8B%E5%80%BC"><span class="nav-number">3.</span> <span class="nav-text">拷贝构造、赋值</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%B1%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B5%85%E6%8B%B7%E8%B4%9D"><span class="nav-number">3.1.</span> <span class="nav-text">深拷贝和浅拷贝</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%99%9A%E5%87%BD%E6%95%B0%E4%B8%8E%E6%9E%84%E9%80%A0%E3%80%81%E6%9E%90%E6%9E%84"><span class="nav-number">3.2.</span> <span class="nav-text">虚函数与构造、析构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E7%BB%8F%E5%85%B8%E9%97%AE%E9%A2%98"><span class="nav-number">3.3.</span> <span class="nav-text">面试经典问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A6%86%E7%9B%96%E3%80%81%E9%87%8D%E8%BD%BD%E5%92%8C%E9%9A%90%E8%97%8F"><span class="nav-number">4.</span> <span class="nav-text">覆盖、重载和隐藏</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%99%9A%E5%87%BD%E6%95%B0%E5%92%8C%E7%BA%AF%E8%99%9A%E5%87%BD%E6%95%B0"><span class="nav-number">5.</span> <span class="nav-text">虚函数和纯虚函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%99%9A%E5%87%BD%E6%95%B0%E4%B8%8E%E5%86%85%E8%81%94"><span class="nav-number">5.1.</span> <span class="nav-text">虚函数与内联</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%99%9A%E5%87%BD%E6%95%B0%E4%B8%8E%E8%99%9A%E7%BB%A7%E6%89%BF"><span class="nav-number">5.2.</span> <span class="nav-text">虚函数与虚继承</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Youni</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">1</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Youni</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

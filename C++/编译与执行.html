@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"younif.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="宏定义宏定义变量一般全部大写，本质是对变量的文本匹配替换，用途：  定义宏函数，可在预处理阶段可切换 加#define DEBUG用于控制程序调试。 使用编译器与头文件中的内部的宏变量来处理编译内容 硬件类型 运行库版本 编译器版本   通过宏变量进行有选择的条件编译  编译器调试宏12345__FUNCTION__ &#x2F;&#x2F;函数名__DATE__     &#x2F;&#x2F;日期__TIME__     &#x2F;&#x2F;时间_">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Youni Blog">
+<meta property="og:url" content="https://younif.github.io/C++/%E7%BC%96%E8%AF%91%E4%B8%8E%E6%89%A7%E8%A1%8C.html">
+<meta property="og:site_name" content="Youni Blog">
+<meta property="og:description" content="宏定义宏定义变量一般全部大写，本质是对变量的文本匹配替换，用途：  定义宏函数，可在预处理阶段可切换 加#define DEBUG用于控制程序调试。 使用编译器与头文件中的内部的宏变量来处理编译内容 硬件类型 运行库版本 编译器版本   通过宏变量进行有选择的条件编译  编译器调试宏12345__FUNCTION__ &#x2F;&#x2F;函数名__DATE__     &#x2F;&#x2F;日期__TIME__     &#x2F;&#x2F;时间_">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-09-18T13:21:48.799Z">
+<meta property="article:modified_time" content="2022-09-13T02:22:36.812Z">
+<meta property="article:author" content="Youni">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://younif.github.io/C++/%E7%BC%96%E8%AF%91%E4%B8%8E%E6%89%A7%E8%A1%8C">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title> | Youni Blog
+</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Youni Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+  
+  
+
+          <div class="content page posts-expand">
+            
+
+    
+    
+    
+    <div class="post-block" lang="zh-CN">
+      <header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">
+</h1>
+
+<div class="post-meta">
+  
+
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+          <h1 id="宏定义"><a href="#宏定义" class="headerlink" title="宏定义"></a>宏定义</h1><p>宏定义变量一般全部大写，本质是对变量的文本匹配替换，用途：</p>
+<ol>
+<li>定义宏函数，可在预处理阶段可切换</li>
+<li>加#define DEBUG用于控制程序调试。</li>
+<li>使用编译器与头文件中的内部的宏变量来处理编译内容<ol start="4">
+<li>硬件类型</li>
+<li>运行库版本</li>
+<li>编译器版本</li>
+</ol>
+</li>
+<li>通过宏变量进行有选择的条件编译</li>
+</ol>
+<h2 id="编译器调试宏"><a href="#编译器调试宏" class="headerlink" title="编译器调试宏"></a>编译器调试宏</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">__FUNCTION__ <span class="comment">//函数名</span></span><br><span class="line">__DATE__     <span class="comment">//日期</span></span><br><span class="line">__TIME__     <span class="comment">//时间</span></span><br><span class="line">__LINE__     <span class="comment">//行数</span></span><br><span class="line">__FILE__     <span class="comment">//文件</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="头文件"><a href="#头文件" class="headerlink" title="头文件"></a>头文件</h1><p>头文件包含只能被定义一次的实体、声明的接口信息，如类、const、constexpr、函数声明、变量声明、模板定义、宏变量定义。头文件不应包含using声明，这会有入侵性，在不经意间引入名字而导致名字冲突。为了头文件不重复包含，使用头文件保护符<code>#ifndef NAME #define NAME -------#endif</code> 。</p>
+<ul>
+<li><p>变量声明和定义区别？</p>
+<ul>
+<li><p>声明仅把类型提供给编译器，并不为其分配内存空间；定义会为其分配存储空间。</p>
+</li>
+<li><p>相同变量可以再多处声明（外部变量extern），但只能在一处定义。</p>
+</li>
+</ul>
+</li>
+<li><p>模板与头文件</p>
+<ul>
+<li>当实例化模板时，编译器必须先解析模板，因此需要将模板的声明和定义都放置在同一个.h文件中。而普通的库文件则需要将声明和定义分开，并链接上即可。</li>
+</ul>
+</li>
+</ul>
+<h1 id="条件编译"><a href="#条件编译" class="headerlink" title="条件编译"></a>条件编译</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifdef</span> /<span class="keyword">ifndef</span> [id]</span></span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> [id]</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>可以通过加#define，并通过#ifdef来判断，将某些具体模块包括进要编译的内容。</p>
+</li>
+<li><p>应对硬件的设置（机器类型等）。</p>
+</li>
+<li><p>条件编译功能if也可实现，但条件编译可以减少被编译语句，从而减少目标程序大小。</p>
+</li>
+</ul>
+<h1 id="宏函数"><a href="#宏函数" class="headerlink" title="宏函数"></a>宏函数</h1><ol>
+<li><p>多条语句作为独立域可使用<code>do &#123;&#125; while(0)</code>，譬如if后的独立域。</p>
+</li>
+<li><p>运算对象，在整体之外加上括号<code>()</code></p>
+</li>
+<li><p>语句过长的情况，可以使用反斜杠<code>\</code></p>
+</li>
+</ol>
+<h2 id="assert"><a href="#assert" class="headerlink" title="assert()"></a><code>assert()</code></h2><p>定义在<code>&lt;cassert&gt;</code>中，是宏函数。用于确定某些条件，当不成立时快速失败。<code>assert(expr)</code> 对expr求值，如果表达式为假则输出信息并终止程序执行。在程序中不要定义名为assert的任何实体。<br>NDEBUG 预处理变量，如果#define了该变量，则assert什么也不做。也可以在编译时选择该命令行选项。我们也可以根据NDEBUG与<code>#ifdef #endif编写自己的条件调试代码，但是需要在源代码的开头， include &lt;assert.h&gt;</code> 之前。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> NDEBUG          <span class="comment">// 加上这行，则 assert 不可用</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;assert.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="built_in">assert</span>( p != <span class="literal">NULL</span> );    <span class="comment">// assert 不可用</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="C-替换预编译"><a href="#C-替换预编译" class="headerlink" title="C++替换预编译"></a>C++替换预编译</h1><p>Inline函数（有编译器的监视）、typedef类型重定义、const常量、条件编译使用template技术来解决</p>
+<h3 id="宏函数与函数"><a href="#宏函数与函数" class="headerlink" title="宏函数与函数"></a>宏函数与函数</h3><ul>
+<li>宏函数比函数执行更快，因为函数需要跳转到具体调用函地址。<ul>
+<li>宏函数属于在结构中插入代码，没有返回值；函数调用具有返回值。</li>
+<li>宏函数参数没有类型，不进行类型检查；函数参数具有类型，需要检查类型。</li>
+<li>宏函数不要在最后加分号。</li>
+</ul>
+</li>
+</ul>
+<h3 id="const"><a href="#const" class="headerlink" title="const"></a>const</h3><ul>
+<li>宏替换发生在编译阶段之前，属于文本插入替换；const作用发生于编译过程中，会检查数据类型。</li>
+</ul>
+<h3 id="typedef"><a href="#typedef" class="headerlink" title="typedef"></a>typedef</h3><ul>
+<li>宏主要用于定义常量及书写复杂的内容；typedef主要用于定义类型别名。<ul>
+<li>宏替换发生在编译阶段之前，属于文本插入替换；typedef是编译的一部分。</li>
+<li>宏不检查类型；typedef会检查数据类型。</li>
+<li>宏不是语句，不在在最后加分号；typedef是语句，要加分号标识结束。</li>
+<li>注意对指针的操作，typedef char * p_char和#define p_char char *区别巨大。</li>
+</ul>
+</li>
+</ul>
+<h3 id="inline"><a href="#inline" class="headerlink" title="inline"></a>inline</h3><ul>
+<li>在使用时，宏只做简单字符串替换（编译前）。而内联函数可以进行参数类型检查（编译时），且具有返回值。<ul>
+<li>内联函数在运行时可调试，而宏定义不可以。</li>
+<li>内联函数本身是函数，强调函数特性，具有重载等功能。</li>
+<li>内联函数可以作为某个类的成员函数，这样可以使用类的保护成员和私有成员。而当一个表达式涉及到类保护成员或私有成员时，宏就不能实现了。</li>
+<li>内联函数是简单函数、不能递归定义、仅仅是对编译器的建议、应该放在头文件中，这样使用该函数的源文件都会内联、定义在类中的成员函数缺省都是内联的、放在函数声明前面不起inline作用、以代码膨胀为代价</li>
+</ul>
+</li>
+</ul>
+<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">int</span> <span class="title">functionName</span><span class="params">(<span class="type">int</span> first, <span class="type">int</span> second,...)</span> </span>&#123;<span class="comment">/****/</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 类内定义，隐式内联</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">A</span> &#123;</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">doA</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> <span class="number">0</span>; &#125;         <span class="comment">// 隐式内联</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 类外定义，需要显式内联</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">A</span> &#123;</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">doA</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">int</span> <span class="title">A::doA</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> <span class="number">0</span>; &#125;   <span class="comment">// 需要显式内联</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h1><h2 id="预处理"><a href="#预处理" class="headerlink" title="预处理"></a>预处理</h2><p>展开宏定义、处理条件编译、处理#include指令、过滤掉注释、添加行号和文件名标识、保留#pragma指令</p>
+<h2 id="编译-1"><a href="#编译-1" class="headerlink" title="编译"></a>编译</h2><p>词法分析 - 语法分析 - 语义分析 - 中间语言生成 - 目标代码生成与优化。</p>
+<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><p>将被编译的二进制文件组装起来成为整体就是链接，这将各个代码段相互的符号地址的引用加以修正。</p>
+<ul>
+<li><p>静态链接</p>
+<p>将库文件链接到最终生成的可执行目标文件中，速度快但浪费内存。静态库生成是对多个目标文件（.o）打包，其包名格式为<code>lib*.a</code>。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//生成静态库</span></span><br><span class="line">gcc -c test1.c    <span class="comment">// 生成test1.o</span></span><br><span class="line">gcc -c test2.c    <span class="comment">// 生成test2.o</span></span><br><span class="line">ar cr libtest.a test1.o test2.o</span><br><span class="line"><span class="comment">//使用静态库</span></span><br><span class="line">gcc -o main main.c -ltest</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>动态链接</p>
+<p>可独立更新。当一个程序引用的两个动态库中存在同名函数时，先被加载的动态库函数有效，后家在的动态库同名函数无效（不会被执行）。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//</span></span><br><span class="line">gcc -fPIC -c test1.c </span><br><span class="line">gcc -fPIC -c test2.c</span><br><span class="line">gcc -shared test1.o test2.o -o libtest.so</span><br><span class="line"><span class="comment">//</span></span><br><span class="line">gcc -o main main.c -ltest</span><br><span class="line"><span class="comment">//默认在环境变量LD_LIBRARY_PATH指定的目录下搜索库文件</span></span><br><span class="line">-Lpath指定搜索库文件的目录</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="Makefile"><a href="#Makefile" class="headerlink" title="Makefile"></a>Makefile</h2><p>自动化编译工具，需要用户描述文件之间的依赖关系与相应的更新命令。make工具会检测文件的更新，并自动编译相关的依赖项。如下所述，其中A是目标文件，B是生成A所依赖的所有文件，下方描述了如何使用B去更新A的命令。</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">A:B</span></span><br><span class="line">(tab)&lt;command&gt;</span><br><span class="line"></span><br><span class="line">test.o : test.c</span><br><span class="line">	gcc -c test.c -o test.o</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>可以在文件中定义”变量名 &#x3D; 变量值”的形式，之后需要使用这个变量时只需要写一个$符号加上变量名即可，当然，和shell一样，最好用()包裹起语句来。</li>
+</ul>
+<h1 id="ELF"><a href="#ELF" class="headerlink" title="ELF"></a>ELF</h1><h2 id="定义与作用"><a href="#定义与作用" class="headerlink" title="定义与作用"></a>定义与作用</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">readelf -l a.out <span class="comment">#查看文件的格式和组成</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">objdump -h prog.o //查看一个.o文件</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">file [file] <span class="comment">#命令通过ELF文件头检查文件类型。</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">nm</span> </span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">strip</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Executable and Linkable Format，作为二进制接口（Application Binary Interface，ABI）而开发和发布的。其中<code>.o</code> 可重定位文件、<code>.so</code>共享库(shared library)、<code>.out</code>可执行文件都是使用该格式描述的。</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>) .text section  可执行代码；(只读、可fork后复用)</span><br><span class="line"><span class="number">2</span>) .data section  被初始化的数据；</span><br><span class="line"><span class="number">3</span>) .bss section   未被初始化的数据；(仅描述大小，不占空间)</span><br><span class="line"><span class="number">4</span>) .rec           重定位条目；</span><br><span class="line"><span class="number">5</span>) .symtab 或者 .dynsym section  符号信息；</span><br><span class="line"><span class="number">6</span>) .strtab 或者 .dynstr section  字符串信息；</span><br><span class="line"><span class="number">7</span>) 其他的section，比方满足调试的目的、满足动态链接与加载的目的等。</span><br></pre></td></tr></table></figure>
+
+<h4 id="Text-amp-Data-amp-Bss"><a href="#Text-amp-Data-amp-Bss" class="headerlink" title="Text &amp; Data &amp; Bss"></a>Text &amp; Data &amp; Bss</h4><ul>
+<li>.text： 也称为代码段(Code)，同时包含一些常量(如一些字符串常量等）。该段内存为静态分配，只读(某些架构可能允许修改)，是相同进程共享的。</li>
+<li>.data： 全局数据区，也有的地方叫GVAR(global value)，用来存放程序中已经初始化的非零全局变量。静态分配。编译时为数据分配空间。<ul>
+<li>data又可分为读写（RW）区域和只读（RO）区域。<br>-&gt; 常数区 （RO段）保存不可更改所以也被称为<code>.rodata</code><br>-&gt; 静态区（ RW段）则是普通非常量全局变量，静态变量就在其中</li>
+</ul>
+</li>
+<li>.bss： 存放程序中未初始化的和初始化零值的全局变量。静态分配，在程序开始时分配空间且通常会被清零。只占运行时的内存空间而不占文件空间，但记录了大小。</li>
+</ul>
+<p>text和data段都在可执行文件中，由系统从可执行文件中加载；而bss段不在可执行文件中，由系统初始化。 </p>
+<h4 id="堆栈（Heap-amp-Stack）"><a href="#堆栈（Heap-amp-Stack）" class="headerlink" title="堆栈（Heap&amp; Stack）"></a>堆栈（Heap&amp; Stack）</h4><p>堆和栈都是动态分配内存，两者空间大小都是可变的。</p>
+<ul>
+<li>Stack： 栈，存放Automatic Variables，按内存地址由高到低方向生长，其最大大小由编译时确定，速度快，通常是局部变量，函数参数等的存储区，最大空间不大。</li>
+<li>Heap： 堆，自由申请的空间，按内存地址由低到高方向生长，其大小由系统内存&#x2F;虚拟内存上限决定，速度较慢，但自由性大，可用空间大。<br>每个线程都会有自己的栈，但是堆空间是共用的。</li>
+</ul>
+
+      </div>
+      
+      
+      
+    </div>
+    
+
+    
+    
+    
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%8F%E5%AE%9A%E4%B9%89"><span class="nav-number">1.</span> <span class="nav-text">宏定义</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E5%99%A8%E8%B0%83%E8%AF%95%E5%AE%8F"><span class="nav-number">1.1.</span> <span class="nav-text">编译器调试宏</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%B4%E6%96%87%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">头文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E7%BC%96%E8%AF%91"><span class="nav-number">3.</span> <span class="nav-text">条件编译</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%8F%E5%87%BD%E6%95%B0"><span class="nav-number">4.</span> <span class="nav-text">宏函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#assert"><span class="nav-number">4.1.</span> <span class="nav-text">assert()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#C-%E6%9B%BF%E6%8D%A2%E9%A2%84%E7%BC%96%E8%AF%91"><span class="nav-number">5.</span> <span class="nav-text">C++替换预编译</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%8F%E5%87%BD%E6%95%B0%E4%B8%8E%E5%87%BD%E6%95%B0"><span class="nav-number">5.0.1.</span> <span class="nav-text">宏函数与函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#const"><span class="nav-number">5.0.2.</span> <span class="nav-text">const</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#typedef"><span class="nav-number">5.0.3.</span> <span class="nav-text">typedef</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#inline"><span class="nav-number">5.0.4.</span> <span class="nav-text">inline</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8"><span class="nav-number">5.0.4.1.</span> <span class="nav-text">使用</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BC%96%E8%AF%91"><span class="nav-number">6.</span> <span class="nav-text">编译</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%84%E5%A4%84%E7%90%86"><span class="nav-number">6.1.</span> <span class="nav-text">预处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E8%AF%91-1"><span class="nav-number">6.2.</span> <span class="nav-text">编译</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%93%BE%E6%8E%A5"><span class="nav-number">6.3.</span> <span class="nav-text">链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Makefile"><span class="nav-number">6.4.</span> <span class="nav-text">Makefile</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ELF"><span class="nav-number">7.</span> <span class="nav-text">ELF</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E4%B8%8E%E4%BD%9C%E7%94%A8"><span class="nav-number">7.1.</span> <span class="nav-text">定义与作用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Text-amp-Data-amp-Bss"><span class="nav-number">7.1.0.1.</span> <span class="nav-text">Text &amp; Data &amp; Bss</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A0%86%E6%A0%88%EF%BC%88Heap-amp-Stack%EF%BC%89"><span class="nav-number">7.1.0.2.</span> <span class="nav-text">堆栈（Heap&amp; Stack）</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Youni</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">1</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Youni</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

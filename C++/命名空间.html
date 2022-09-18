@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"younif.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="命名空间using 声明头文件不应包含using声明，这会有入侵性，在不经意间引入名字，隐含着名字冲突。 用于只引入对应命名空间的一个成员。它使得我们可以清楚知道程序中所引用的到底是哪个名字。如： 1using namespace_name::name;  构造函数的 using 声明在 C++11 中，派生类能够重用其直接基类定义的构造函数。 12345class Derived : Base">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Youni Blog">
+<meta property="og:url" content="https://younif.github.io/C++/%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4.html">
+<meta property="og:site_name" content="Youni Blog">
+<meta property="og:description" content="命名空间using 声明头文件不应包含using声明，这会有入侵性，在不经意间引入名字，隐含着名字冲突。 用于只引入对应命名空间的一个成员。它使得我们可以清楚知道程序中所引用的到底是哪个名字。如： 1using namespace_name::name;  构造函数的 using 声明在 C++11 中，派生类能够重用其直接基类定义的构造函数。 12345class Derived : Base">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-09-18T13:21:48.776Z">
+<meta property="article:modified_time" content="2022-07-07T07:41:15.000Z">
+<meta property="article:author" content="Youni">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://younif.github.io/C++/%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title> | Youni Blog
+</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Youni Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+  
+  
+
+          <div class="content page posts-expand">
+            
+
+    
+    
+    
+    <div class="post-block" lang="zh-CN">
+      <header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">
+</h1>
+
+<div class="post-meta">
+  
+
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+          <h1 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h1><h2 id="using-声明"><a href="#using-声明" class="headerlink" title="using 声明"></a>using 声明</h2><p>头文件不应包含using声明，这会有入侵性，在不经意间引入名字，隐含着名字冲突。</p>
+<p>用于只引入对应命名空间的一个成员。它使得我们可以清楚知道程序中所引用的到底是哪个名字。如：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> namespace_name::name;</span><br></pre></td></tr></table></figure>
+
+<h3 id="构造函数的-using-声明"><a href="#构造函数的-using-声明" class="headerlink" title="构造函数的 using 声明"></a>构造函数的 using 声明</h3><p>在 C++11 中，派生类能够重用其直接基类定义的构造函数。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Derived</span> : Base &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">using</span> Base::Base;</span><br><span class="line">    <span class="comment">/* ... */</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>如上 using 声明，对于基类的每个构造函数，编译器都生成一个与之对应（形参列表完全相同）的派生类构造函数。生成如下类型构造函数：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Derived</span>(parms) : <span class="built_in">Base</span>(args) &#123; &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="using-指示"><a href="#using-指示" class="headerlink" title="using 指示"></a>using 指示</h4><p><code>using 指示</code> 使得某个特定命名空间中所有名字都可见，这样我们就无需再为它们添加任何前缀限定符了。如：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> namespace_name name;</span><br></pre></td></tr></table></figure>
+
+<h4 id="尽量少使用-using-指示-污染命名空间"><a href="#尽量少使用-using-指示-污染命名空间" class="headerlink" title="尽量少使用 using 指示 污染命名空间"></a>尽量少使用 <code>using 指示</code> 污染命名空间</h4><blockquote>
+<p>一般说来，使用 using 命令比使用 using 编译命令更安全，这是由于它<strong>只导入了指定的名称</strong>。如果该名称与局部名称发生冲突，编译器将<strong>发出指示</strong>。using编译命令导入所有的名称，包括可能并不需要的名称。如果与局部名称发生冲突，则<strong>局部名称将覆盖名称空间版本</strong>，而编译器<strong>并不会发出警告</strong>。另外，名称空间的开放性意味着名称空间的名称可能分散在多个地方，这使得难以准确知道添加了哪些名称。</p>
+</blockquote>
+<p>using 使用</p>
+<p>尽量少使用 <code>using 指示</code></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br></pre></td></tr></table></figure>
+
+<p>应该多使用 <code>using 声明</code></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> x;</span><br><span class="line">std::cin &gt;&gt; x ;</span><br><span class="line">std::cout &lt;&lt; x &lt;&lt; std::endl;</span><br></pre></td></tr></table></figure>
+
+<p>或者</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> std::cin;</span><br><span class="line"><span class="keyword">using</span> std::cout;</span><br><span class="line"><span class="keyword">using</span> std::endl;</span><br><span class="line"><span class="type">int</span> x;</span><br><span class="line">cin &gt;&gt; x;</span><br><span class="line">cout &lt;&lt; x &lt;&lt; endl;</span><br></pre></td></tr></table></figure>
+
+<h2 id="范围解析运算符"><a href="#范围解析运算符" class="headerlink" title=":: 范围解析运算符"></a>:: 范围解析运算符</h2><h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><ol>
+<li>全局作用域符（<code>::name</code>）：用于类型名称（类、类成员、成员函数、变量等）前，表示作用域为全局命名空间</li>
+<li>类作用域符（<code>class::name</code>）：用于表示指定类型的作用域范围是具体某个类的</li>
+<li>命名空间作用域符（<code>namespace::name</code>）:用于表示指定类型的作用域范围是具体某个命名空间的</li>
+</ol>
+<p>:: 使用</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> count = <span class="number">11</span>;         <span class="comment">// 全局（::）的 count</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">A</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> count;   <span class="comment">// 类 A 的 count（A::count）</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="type">int</span> A::count = <span class="number">21</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">fun</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> count = <span class="number">31</span>;     <span class="comment">// 初始化局部的 count 为 31</span></span><br><span class="line">    count = <span class="number">32</span>;         <span class="comment">// 设置局部的 count 的值为 32</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ::count = <span class="number">12</span>;       <span class="comment">// 测试 1：设置全局的 count 的值为 12</span></span><br><span class="line"></span><br><span class="line">    A::count = <span class="number">22</span>;      <span class="comment">// 测试 2：设置类 A 的 count 为 22</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">fun</span>();                <span class="comment">// 测试 3</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="class与function的名称空间"><a href="#class与function的名称空间" class="headerlink" title="class与function的名称空间"></a>class与function的名称空间</h2><h3 id="在C语言中"><a href="#在C语言中" class="headerlink" title="在C语言中"></a>在C语言中</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Student</span> &#123;</span></span><br><span class="line">    <span class="type">int</span> age; </span><br><span class="line">&#125; S;</span><br><span class="line"><span class="comment">//等价于</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Student</span> &#123;</span> </span><br><span class="line">    <span class="type">int</span> age; </span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Student</span> <span class="title">S</span>;</span></span><br></pre></td></tr></table></figure>
+
+<p>此时 <code>S</code> 等价于 <code>struct Student</code>，但两个标识符名称空间不相同。另外还可以定义与 <code>struct Student</code> 不冲突的 <code>void Student() &#123;&#125;</code>。</p>
+<h3 id="在C-语言中"><a href="#在C-语言中" class="headerlink" title="在C++语言中"></a>在C++语言中</h3><p>由于<code>C++</code>编译器定位符号的规则（搜索规则）改变，导致不同于C语言。<br>一、如果在类标识符空间定义了 <code>struct Student &#123;...&#125;;</code>，使用 <code>Student me;</code> 时，编译器将搜索全局标识符表，<code>Student</code> 未找到，则在类标识符内搜索。即表现为可以使用 <code>Student</code> 也可以使用 <code>struct Student</code>，如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// cpp</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Student</span> &#123; </span><br><span class="line">    <span class="type">int</span> age; </span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">( Student me )</span></span>;       <span class="comment">// 正确，&quot;struct&quot; 关键字可省略</span></span><br></pre></td></tr></table></figure>
+
+<p>二、若定义了与 <code>Student</code> 同名函数之后，则 <code>Student</code> 只代表函数，不代表结构体，如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">Student</span> &#123; </span><br><span class="line">    <span class="type">int</span> age; </span><br><span class="line">&#125; S;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Student</span><span class="params">()</span> </span>&#123;&#125;           <span class="comment">// 正确，定义后 &quot;Student&quot; 只代表此函数</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//void S() &#123;&#125;               // 错误，符号 &quot;S&quot; 已经被定义为一个 &quot;struct Student&quot; 的别名</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">Student</span>(); </span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">Student</span> me;      <span class="comment">// 或者 &quot;S me&quot;;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      </div>
+      
+      
+      
+    </div>
+    
+
+    
+    
+    
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4"><span class="nav-number">1.</span> <span class="nav-text">命名空间</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#using-%E5%A3%B0%E6%98%8E"><span class="nav-number">1.1.</span> <span class="nav-text">using 声明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E7%9A%84-using-%E5%A3%B0%E6%98%8E"><span class="nav-number">1.1.1.</span> <span class="nav-text">构造函数的 using 声明</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#using-%E6%8C%87%E7%A4%BA"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">using 指示</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%BD%E9%87%8F%E5%B0%91%E4%BD%BF%E7%94%A8-using-%E6%8C%87%E7%A4%BA-%E6%B1%A1%E6%9F%93%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">尽量少使用 using 指示 污染命名空间</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8C%83%E5%9B%B4%E8%A7%A3%E6%9E%90%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">1.2.</span> <span class="nav-text">:: 范围解析运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E7%B1%BB"><span class="nav-number">1.2.1.</span> <span class="nav-text">分类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#class%E4%B8%8Efunction%E7%9A%84%E5%90%8D%E7%A7%B0%E7%A9%BA%E9%97%B4"><span class="nav-number">1.3.</span> <span class="nav-text">class与function的名称空间</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8C%E8%AF%AD%E8%A8%80%E4%B8%AD"><span class="nav-number">1.3.1.</span> <span class="nav-text">在C语言中</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8C-%E8%AF%AD%E8%A8%80%E4%B8%AD"><span class="nav-number">1.3.2.</span> <span class="nav-text">在C++语言中</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Youni</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">1</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Youni</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

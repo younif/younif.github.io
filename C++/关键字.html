@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"younif.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="unionunion用于在同一空间中的不同时期中存储不同的内容，以节省空间。表面上看起来内部有多个类型，但某一时刻只能存储其中的某一种。默认访问控制符为 public，可以含有构造函数、析构函数。  匿名 union 在定义所在作用域可直接访问 union 成员，但不能包含 protected 成员或 private 成员 全局匿名 union 必须是静态（static）的  union判断大小端">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Youni Blog">
+<meta property="og:url" content="https://younif.github.io/C++/%E5%85%B3%E9%94%AE%E5%AD%97.html">
+<meta property="og:site_name" content="Youni Blog">
+<meta property="og:description" content="unionunion用于在同一空间中的不同时期中存储不同的内容，以节省空间。表面上看起来内部有多个类型，但某一时刻只能存储其中的某一种。默认访问控制符为 public，可以含有构造函数、析构函数。  匿名 union 在定义所在作用域可直接访问 union 成员，但不能包含 protected 成员或 private 成员 全局匿名 union 必须是静态（static）的  union判断大小端">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-09-18T13:21:48.762Z">
+<meta property="article:modified_time" content="2022-09-01T02:57:38.489Z">
+<meta property="article:author" content="Youni">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://younif.github.io/C++/%E5%85%B3%E9%94%AE%E5%AD%97">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title> | Youni Blog
+</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Youni Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+  
+  
+
+          <div class="content page posts-expand">
+            
+
+    
+    
+    
+    <div class="post-block" lang="zh-CN">
+      <header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">
+</h1>
+
+<div class="post-meta">
+  
+
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+          <h1 id="union"><a href="#union" class="headerlink" title="union"></a>union</h1><p>union用于在同一空间中的不同时期中存储不同的内容，以节省空间。表面上看起来内部有多个类型，但某一时刻只能存储其中的某一种。默认访问控制符为 public，可以含有构造函数、析构函数。</p>
+<ul>
+<li>匿名 union 在定义所在作用域可直接访问 union 成员，但不能包含 protected 成员或 private 成员</li>
+<li>全局匿名 union 必须是静态（static）的</li>
+</ul>
+<h3 id="union判断大小端"><a href="#union判断大小端" class="headerlink" title="union判断大小端"></a>union判断大小端</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">union</span> <span class="title class_">UnionTest</span> &#123;</span><br><span class="line">    <span class="built_in">UnionTest</span>() : <span class="built_in">i</span>(<span class="number">10</span>) &#123;&#125;;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="type">double</span> d;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="keyword">union</span> &#123;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="type">double</span> d;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    UnionTest u;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">union</span> &#123;</span><br><span class="line">        <span class="type">int</span> i;</span><br><span class="line">        <span class="type">double</span> d;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; u.i &lt;&lt; std::endl;  <span class="comment">// 输出 UnionTest 联合的 10</span></span><br><span class="line"></span><br><span class="line">    ::i = <span class="number">20</span>;</span><br><span class="line">    std::cout &lt;&lt; ::i &lt;&lt; std::endl;  <span class="comment">// 输出全局静态匿名联合的 20</span></span><br><span class="line"></span><br><span class="line">    i = <span class="number">30</span>;</span><br><span class="line">    std::cout &lt;&lt; i &lt;&lt; std::endl;    <span class="comment">// 输出局部匿名联合的 30</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="extern"><a href="#extern" class="headerlink" title="extern"></a>extern</h1><p>extern用于声明其他模块的全局变量或函数，但如果此时给与初始化值则会在本模块定义并分配内存。</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/yc_sunniwell/archive/2010/07/14/1777431.html">extern参考资料</a></p>
+<h1 id="extern-“C”"><a href="#extern-“C”" class="headerlink" title="extern “C”"></a>extern “C”</h1><p>被 <code>extern &quot;C&quot;</code> 修饰的变量和函数是按照 C 语言方式编译和链接的，可以避免<code> C++</code> 因符号修饰而导致代码不能和C语言库中的符号进行链接的问题。</p>
+<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifdef</span> __cplusplus</span></span><br><span class="line"><span class="keyword">extern</span> <span class="string">&quot;C&quot;</span> &#123;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> *<span class="title">memset</span><span class="params">(<span class="type">void</span> *, <span class="type">int</span>, <span class="type">size_t</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> __cplusplus</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+
+<h1 id="static"><a href="#static" class="headerlink" title="static"></a>static</h1><p>关键：全局可见性、静态存储区、脱离对象实例、初始化。</p>
+<ol>
+<li>修改全局变量、函数，表明仅在本文件使用。共享要在声明与定义同时添加extern。</li>
+<li>修饰局部变量，延长变量生存期，使得函数具有状态。</li>
+<li>修饰成员变量，使其成为类的共有变量，只能在类外被定义。</li>
+<li>修饰成员函数，使其不隐含this指针，只能访问static成员变量。</li>
+</ol>
+<h1 id="const"><a href="#const" class="headerlink" title="const"></a>const</h1><p>为了取代预编译的符号常量导致的debug困难。const作为编译期常量可以保存在符号表中，仅在文件内有效，共享需要在声明与定义添加extern关键字。</p>
+<ol>
+<li><p>修饰变量，不可改变；</p>
+</li>
+<li><p>修饰指针，分为指向常量的指针，常量的指针</p>
+</li>
+<li><p>修饰引用，指向常量的引用（reference to const）。常用于函数形参，避免拷贝且限制对值修改；</p>
+</li>
+<li><p>修饰成员函数，限制该函数修改成员变量。</p>
+</li>
+</ol>
+<ul>
+<li><p>常引用，用于引用一个对象，且限制使用该引用修改对象，常用于形参传递。</p>
+<ul>
+<li><strong>下面这两个函数在执行过程中有什么区别</strong>？<br><code>int f(string&amp;a); f(“abc”);//报错</code><br><code>int f(const string&amp;a); f(“abc”);//正常</code></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">指针</span><br><span class="line">*  <span class="type">const</span>只修饰其后的【变量】，<span class="type">const</span>放在类型前还是类型后并没有区别 </span><br><span class="line"><span class="type">const</span> <span class="type">int</span> *p<span class="comment">//指向的值不可变</span></span><br><span class="line"><span class="type">int</span> <span class="type">const</span> *p<span class="comment">//指向的值不可变</span></span><br><span class="line"><span class="type">int</span> *<span class="type">const</span> p<span class="comment">//地址不可变, 那个地址指向的值可以变</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> *<span class="type">const</span> p<span class="comment">//地址和值都不可变</span></span><br><span class="line"><span class="type">int</span> <span class="type">const</span> *<span class="type">const</span> p<span class="comment">//地址和值都不可变</span></span><br><span class="line">常引用</span><br><span class="line">- <span class="type">const</span> <span class="type">int</span> &amp; a = b</span><br><span class="line"></span><br><span class="line"><span class="comment">// 类</span></span><br><span class="line"><span class="keyword">class</span> A</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">const</span> <span class="type">int</span> a;                <span class="comment">// 常对象成员，只能在初始化列表赋值</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 构造函数</span></span><br><span class="line">    <span class="built_in">A</span>() : <span class="built_in">a</span>(<span class="number">0</span>) &#123; &#125;;</span><br><span class="line">    <span class="built_in">A</span>(<span class="type">int</span> x) : <span class="built_in">a</span>(x) &#123; &#125;;        <span class="comment">// 初始化列表</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// const可用于对重载函数的区分</span></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">getValue</span><span class="params">()</span></span>;             <span class="comment">// 普通成员函数</span></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">getValue</span><span class="params">()</span> <span class="type">const</span></span>;       <span class="comment">// 常成员函数，不得修改类中的任何数据成员的值</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">function</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 对象</span></span><br><span class="line">    A b;                        <span class="comment">// 普通对象，可以调用全部成员函数、更新常成员变量</span></span><br><span class="line">    <span class="type">const</span> A a;                  <span class="comment">// 常对象，只能调用常成员函数</span></span><br><span class="line">    <span class="type">const</span> A *p = &amp;a;            <span class="comment">// 指针变量，指向常对象</span></span><br><span class="line">    <span class="type">const</span> A &amp;q = a;             <span class="comment">// 指向常对象的引用</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 指针</span></span><br><span class="line">    <span class="type">char</span> greeting[] = <span class="string">&quot;Hello&quot;</span>;</span><br><span class="line">    <span class="type">char</span>* p1 = greeting;                <span class="comment">// 指针变量，指向字符数组变量</span></span><br><span class="line">    <span class="type">const</span> <span class="type">char</span>* p2 = greeting;          <span class="comment">// 指针变量，指向字符数组常量（const 后面是 char，说明指向的字符（char）不可改变）</span></span><br><span class="line">    <span class="type">char</span>* <span class="type">const</span> p3 = greeting;          <span class="comment">// 自身是常量的指针，指向字符数组变量（const 后面是 p3，说明 p3 指针自身不可改变）</span></span><br><span class="line">    <span class="type">const</span> <span class="type">char</span>* <span class="type">const</span> p4 = greeting;    <span class="comment">// 自身是常量的指针，指向字符数组常量</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 函数</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">function1</span><span class="params">(<span class="type">const</span> <span class="type">int</span> Var)</span></span>;           <span class="comment">// 传递过来的参数在函数内不可变</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">function2</span><span class="params">(<span class="type">const</span> <span class="type">char</span>* Var)</span></span>;         <span class="comment">// 参数指针所指内容为常量</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">function3</span><span class="params">(<span class="type">char</span>* <span class="type">const</span> Var)</span></span>;         <span class="comment">// 参数指针为常量</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">function4</span><span class="params">(<span class="type">const</span> <span class="type">int</span>&amp; Var)</span></span>;          <span class="comment">// 引用参数在函数内为常量</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 函数返回值</span></span><br><span class="line"><span class="function"><span class="type">const</span> <span class="type">int</span> <span class="title">function5</span><span class="params">()</span></span>;      <span class="comment">// 返回一个常数</span></span><br><span class="line"><span class="function"><span class="type">const</span> <span class="type">int</span>* <span class="title">function6</span><span class="params">()</span></span>;     <span class="comment">// 返回一个指向常量的指针变量，使用：const int *p = function6();</span></span><br><span class="line"><span class="function"><span class="type">int</span>* <span class="type">const</span> <span class="title">function7</span><span class="params">()</span></span>;     <span class="comment">// 返回一个指向变量的常指针，使用：int* const p = function7();</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="static-const"><a href="#static-const" class="headerlink" title="static const"></a>static const</h1><ul>
+<li>const、static、const static 声明、定义、初始化</li>
+</ul>
+<p>规则：const，必须在内部声明、定义、初始化。<br>static，必须在内部声明、在外部定义、在外部初始化。<br>const static，必须在内部声明、在外部定义、必须初始化，但位置随便。</p>
+<p>解释：static变量只与类有关，在类内部只能声明，在内部无法初始化也无法被定义！必须在类的外部进行定义、初始化。未在外部定义的static成员表现出来链接错误。const static作为static成员，也必须在外部定义，否则连接错误。const成员一般在初始化表中初始化，（或者仅作为编译期常量）。</p>
+<p>类的初始化列表是用于实例化对象，不能用于static成员。</p>
+<p><a href="#">static函数能定义为虚函数吗？能定义为const函数吗？</a><br>因为static函数不属于对象，只能操作static成员变量，所以不能为虚函数。 因为const修饰的是this指针，static函数没有this指针，所以也不能为const函数。</p>
+<h1 id="volatile"><a href="#volatile" class="headerlink" title="volatile"></a>volatile</h1><p>多线程共享变量，可能会导致CPU间cache数据不一致。volatile强制其不能在每CPU cache中保存、读取来避免该问题。（告诉编译器该变量可能会在当前控制流之外发生变化。）</p>
+<h2 id="const-volatile"><a href="#const-volatile" class="headerlink" title="const volatile"></a>const volatile</h2><p>只读易变元素，volatile表示该值可能会被其他CPU所改变，但本段代码不应该修改它。</p>
+<h2 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h2><p>中断服务子程序修该一个指向一个buffer的指针时。如下面的函数有什么错误：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">square</span><span class="params">(<span class="keyword">volatile</span> <span class="type">int</span> ptr)</span> &#123;</span><br><span class="line"><span class="keyword">return</span> ptr*ptr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这段代码的目的是用来返指针ptr指向值的平方，但是，由于ptr指向一个volatile型参数，编译器将产生类似下面的代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">square</span><span class="params">(<span class="keyword">volatile</span> <span class="type">int</span> ptr)</span>&#123;</span><br><span class="line"><span class="type">int</span> a,b;</span><br><span class="line">a = ptr;</span><br><span class="line">b = ptr;</span><br><span class="line"><span class="keyword">return</span> ab;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>由于ptr的值可能被意想不到地该变，因此a和b可能是不同的。正确做法如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">long</span> <span class="title function_">square</span><span class="params">(<span class="keyword">volatile</span> <span class="type">int</span> ptr)</span>&#123;</span><br><span class="line"><span class="type">int</span> a;</span><br><span class="line">a = ptr;</span><br><span class="line"><span class="keyword">return</span> aa;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="decltype"><a href="#decltype" class="headerlink" title="decltype"></a>decltype</h1><p>decltype 关键字用于获取实体的声明类型或表达式的类型及值分类。语法：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">decltype</span> ( expression )</span><br></pre></td></tr></table></figure>
+
+<p>使用</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 尾置返回允许我们在参数列表之后声明返回类型</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> It&gt;</span><br><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">fcn</span><span class="params">(It beg, It end)</span> -&gt; <span class="title">decltype</span><span class="params">(*beg)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 处理序列</span></span><br><span class="line">    <span class="keyword">return</span> *beg;    <span class="comment">// 返回序列中一个元素的引用</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 为了使用模板参数成员，必须用 typename</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> It&gt;</span><br><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">fcn2</span><span class="params">(It beg, It end)</span> -&gt; <span class="keyword">typename</span> remove_reference&lt;<span class="title">decltype</span><span class="params">(*beg)</span>&gt;::type</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 处理序列</span></span><br><span class="line">    <span class="keyword">return</span> *beg;    <span class="comment">// 返回序列中一个元素的拷贝</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      </div>
+      
+      
+      
+    </div>
+    
+
+    
+    
+    
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#union"><span class="nav-number">1.</span> <span class="nav-text">union</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#union%E5%88%A4%E6%96%AD%E5%A4%A7%E5%B0%8F%E7%AB%AF"><span class="nav-number">1.0.1.</span> <span class="nav-text">union判断大小端</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#extern"><span class="nav-number">2.</span> <span class="nav-text">extern</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#extern-%E2%80%9CC%E2%80%9D"><span class="nav-number">3.</span> <span class="nav-text">extern “C”</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">3.1.</span> <span class="nav-text">使用方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#static"><span class="nav-number">4.</span> <span class="nav-text">static</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#const"><span class="nav-number">5.</span> <span class="nav-text">const</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#static-const"><span class="nav-number">6.</span> <span class="nav-text">static const</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#volatile"><span class="nav-number">7.</span> <span class="nav-text">volatile</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#const-volatile"><span class="nav-number">7.1.</span> <span class="nav-text">const volatile</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90%EF%BC%9A"><span class="nav-number">7.2.</span> <span class="nav-text">例子：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#decltype"><span class="nav-number">8.</span> <span class="nav-text">decltype</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Youni</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">1</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Youni</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
